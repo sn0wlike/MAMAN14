@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/Maman14.dir/main.c.o CMakeFiles/Maman14.dir/command.c.o CMakeFiles/Maman14.dir/definitions.c.o CMakeFiles/Maman14.dir/symbol.c.o CMakeFiles/Maman14.dir/io_maneger.c.o CMakeFiles/Maman14.dir/object.c.o  -o Maman14 -lm 
