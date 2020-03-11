@@ -118,7 +118,7 @@ BOOL phaseOne(char *srcFileName, pFlag flags, pE_Flag eFlags, UINT *DC, UINT *IC
                 /*add symbol to symbol list with the type data */
                 symbol = saveSymbol(symbol, eFlags, flags, line, *DC, data);
             }
-            eFlags->errorInTheData = !printToDataFile(line, dataImgTmp, DC);
+            eFlags->errorInTheData = !printToDataFile(line, dataImgTmp, DC, eFlags);
         } else if (strstr(line, EXTERN_INSTRUCTION) || strstr(line, ENTRY_INSTRUCTION)) /*LINE 8*/
         {
             /*print entery external Error*/
@@ -342,7 +342,7 @@ void printToExternal(pInstruction instruction1, UINT IC, FILE* outPutExt)
 
 /*TODO:
  * 1. test of symbol is leagel
- * 2. test if symbol is savedWord
+ * 2. test if symbol is savedWord NEED TO BE TASTED!!!
  * 3. test if number in the input is in range
  * 4. string is ended with " or started
  * */

@@ -34,7 +34,7 @@ int parseToRAW(char *op,int* adress,int*oprandARE)
 {
     char* splitter;
 
-    PtSymbol node;
+    PtSymbol node = NULL;
     node = isSymbol(op,&symbolListRoot);
     if(node)
     {
@@ -55,7 +55,10 @@ int parseToRAW(char *op,int* adress,int*oprandARE)
             } else {
                 *adress = atoi(splitter+1);
             }
-
+            if(*adress > MAX_NUMBER_VALUE_NOT_DATA || *adress < MIN_NUMBER_VALUE_NOT_DATA)
+            {
+                return OUT_OF_RANGE;
+            }
         }else if((splitter = strchr(op,'r'))!=NULL)
         {
             *adress = SHIFT_TO_NUMBER(*(splitter+1));

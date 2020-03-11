@@ -67,15 +67,19 @@ void clrSpaces(char* s)
     }
 }
 
-BOOL printToDataFile(char *line, FILE *f, UINT *DC) {
+BOOL printToDataFile(char *line, FILE *f, UINT *DC, pE_Flag errorFlag) {
 
-    char *dataS = line,*dataE,*split,data;
+    char *dataS = line,*dataE=NULL,*split=NULL,data=0;
     int i =1;
     unsigned  int x = MSB_ON;
     int tmp = 0;
     if(strstr(line,"string")) {
         dataS = strchr(dataS, '"')+1;
         dataE = strchr(dataS, '"');
+        if(dataE == NULL) {
+            errorFlag->noStringEnd = TRUE;
+            return NO_STRING_TERMANIATOR;
+        }
         while(dataS != dataE)
         {
             while(i<=15)

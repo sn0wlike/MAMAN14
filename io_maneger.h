@@ -21,7 +21,7 @@ char *readLine(FILE* fp, size_t size);
  */
 void clrSpaces(char* data);
 
-BOOL printToDataFile(char *line, FILE* f, UINT *DC);
+BOOL printToDataFile(char *line, FILE *f, UINT *DC, pE_Flag errorFlag);
 
 /**
  * this will paste the data img to the output file

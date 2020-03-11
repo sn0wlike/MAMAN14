@@ -51,6 +51,11 @@ BOOL printError(pE_Flag eFlag, pFlag flag1, int lineCounter) {
         flag1->dontMakeFile = TRUE;
         retVal = TRUE;
     }
+    if (eFlag->noStringEnd) {
+        printf("ERROR: String no \" terminated");
+        flag1->dontMakeFile = TRUE;
+        retVal = TRUE;
+    }
     eFlag->unknownInstrction = FALSE;
     eFlag->symbolExsitis = FALSE;
     eFlag->errorInTheData = FALSE;
@@ -60,5 +65,6 @@ BOOL printError(pE_Flag eFlag, pFlag flag1, int lineCounter) {
     eFlag->undefeindedEntrySymbol = FALSE;
     eFlag->unableToCrateFile = FALSE;
     eFlag->tooLongLine = FALSE;
+    eFlag->noStringEnd = FALSE;
     return retVal;
 }

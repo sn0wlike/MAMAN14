@@ -21,6 +21,45 @@ BOOL isSymbolExsits(char* label,PtSymbol node,symbolProperties type)
 tSymbol symbolListRoot;
 tSymbol EsymbolListRoot;
 
+
+BOOL isSymbolLegit(char* label)
+{
+    int i;
+    BOOL retVal = TRUE;
+    char *oprands = OPRAND_LIST;
+    char *regsters = REGISTER_LIST;
+    for(i=0;i<OPRAND_AMOUNT;i++)
+    {
+        if(strcmp(label,oprands+i) == 0)
+            retVal = FALSE;
+    }
+    for(i=0;i<REGISTER_LIST_LEN;i++)
+    {
+        if(strcmp(label,regsters+i) == 0)
+            retVal = FALSE;
+    }
+    if(strcmp(label,DATA_INSTRUCTION) == 0)
+    {
+        retVal = FALSE;
+    }
+    if(strcmp(label,EXTERN_INSTRUCTION) == 0)
+    {
+        retVal = FALSE;
+    }
+    if(strcmp(label,STRING_INSTRUCTION) == 0)
+    {
+        retVal = FALSE;
+    }
+    if(strcmp(label,ENTRY_INSTRUCTION) == 0)
+    {
+        retVal = FALSE;
+    }
+
+    return retVal;
+
+}
+
+
 PtSymbol isSymbol(char *symbol,PtSymbol root)
 {
     if(root == NULL)
@@ -83,6 +122,10 @@ BOOL addSymbol(char *lable, PtSymbol linkList, MEMORY_TYPE location, symbolPrope
     /*cheack double only if isn't entry or external*/
     if(type != external && type != entry && isSymbolExsits(lable,&symbolListRoot,type))
         return FALSE;
+    if(isSymbolLegit(lable) == FALSE)
+    {
+        return FALSE;
+    }
     strcpy(pSymbol,lable);
     if(endOfSymbol!=NULL)*endOfSymbol = ':';
     linkList->next = malloc(sizeof(tSymbol));
