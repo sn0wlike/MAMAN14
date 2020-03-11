@@ -26,16 +26,19 @@ BOOL isSymbolLegit(char* label)
 {
     int i;
     BOOL retVal = TRUE;
-    char *oprands = OPRAND_LIST;
-    char *regsters = REGISTER_LIST;
+    char* oprands[] = {"mov","cmp","add","sub",
+                    "lea","clr","not","inc",
+                    "dec","jmp","bne","red",
+                    "prn","jsr","rts","stop"};
+    char* regsters[] = {"r0","r1","r2","r3","r4","r5","r6","r7"};
     for(i=0;i<OPRAND_AMOUNT;i++)
     {
-        if(strcmp(label,oprands+i) == 0)
+        if(strcmp(label,oprands[i]) == 0)
             retVal = FALSE;
     }
     for(i=0;i<REGISTER_LIST_LEN;i++)
     {
-        if(strcmp(label,regsters+i) == 0)
+        if(strcmp(label,regsters[i]) == 0)
             retVal = FALSE;
     }
     if(strcmp(label,DATA_INSTRUCTION) == 0)
@@ -75,6 +78,7 @@ PtSymbol isSymbol(char *symbol,PtSymbol root)
 
 PtSymbol searchForSymbol(char *symbolName,PtSymbol root)
 {
+
     if(root == NULL || root->next == NULL)
     {
         return NULL;

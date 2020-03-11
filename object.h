@@ -12,11 +12,6 @@
 #define NON_IMMEDIATE_REGISTER_PASS 4
 #define DIRECT_REGISTER_PASS 8
 
-#define OPCODE_START_BIT 11
-#define REGISTER_LIST {"r0","r1","r2","r3","r4",\
-                        "r5","r6","r7"}
-#define REGISTER_LIST_SIZE 8
-
 #define UNKNOW_OPRAND -1
 #define ADRESSING_ERROR -2
 #define OB_LINE_CREATED 0
@@ -29,14 +24,22 @@ typedef struct _tObject object,*pObject;
 struct _tObject{
     UINT ob:15;
 };
-typedef struct{
-    UINT methode:4;
-}adreesMathod,*pAdressmathod;
 
-BOOL addOB(pObject head,int ob);
-pObject newOB();
-
+/**
+ *
+ * @brief this function prints to file the object crated
+ * @param f file to print the Object crated
+ * @param ins the instruction
+ * @param IC  instruction counter of current line
+ * @return Error Code
+ */
 int crateOBline(FILE* f, pInstruction ins, UINT IC);
+/**
+ * @brief this function identifies the adressing method
+ * @param methode this will have the method
+ * @param oprand the oprend to identify the mthod from
+ * @return Error code
+ */
 int adreesMathodidentifier(UCHAR* methode,char* oprand);
 
 
